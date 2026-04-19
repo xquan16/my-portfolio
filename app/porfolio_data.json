@@ -1,0 +1,87 @@
+{
+    "personal_info": {
+      "name": "CHAN XIN QUAN",
+      "degree": "B.Sc. in Computer Science (Artificial Intelligence)",
+      "current_status": "Year 2 Completed (CGPA: 3.6)",
+      "internship_availability": {
+        "start_date": "04 May 2026",
+        "end_date": "28 Aug 2026"
+      },
+      "contact": {
+        "linkedin": "https://www.linkedin.com/in/chanxinquan",
+        "github": "https://github.com/xquan16",
+        "whatsapp": "https://wa.me/60169854183",
+        "email": "0216chq@gmail.com"
+      }
+    },
+    "work_experience": [
+      {
+        "role": "Backend Developer Intern",
+        "organization": "Infinity Data Tech",
+        "period": "May 2026 – Aug 2026"
+      },
+      {
+        "role": "Badminton Coach (Part-Time)",
+        "organization": "VH Badminton Academy",
+        "period": "2025 – Present"
+      },
+      {
+        "role": "Event Lead & Coordinator",
+        "organization": "APU Industry Tech Talk (Deriv)",
+        "period": "March 2026"
+      },
+      {
+        "role": "E-commerce Store Owner",
+        "organization": "BiGFamilY (Dropshipping)",
+        "period": "2020 – 2021",
+        "link": "http://shopee.com.my/big_family.shop"
+      }
+    ],
+    "projects": [
+      {
+        "title": "Zero to AI: Learning Platform",
+        "description": "Engineered a dual-master page architecture with a role-based theming system. Integrated Hugging Face models to deploy a context-aware Real-Time AI Assistant.",
+        "technologies": ["ASP.NET", "C#", "SQL Server", "AI APIs"],
+        "github_link": "https://github.com/xquan16/zero-to-ai"
+      },
+      {
+        "title": "Airport Management System",
+        "description": "Developed a highly concurrent airport simulator using Java threads to manage real-time runway and gate contention, utilizing Semaphores to prevent deadlocks.",
+        "technologies": ["Java", "Multi-threading", "Concurrency", "OOP"],
+        "github_link": "https://github.com/xquan16/airport-management"
+      },
+      {
+        "title": "PLAPS: Library & Parking System",
+        "description": "Developed an advanced data structures application demonstrating Queues, Stacks, and Priority Queues, entirely implemented without using C++ STL containers.",
+        "technologies": ["C++", "Data Structures", "Algorithm Design", "Memory Management"],
+        "github_link": "https://github.com/xquan16/plaps"
+      },
+      {
+        "title": "AI Research (Ant Colony)",
+        "description": "Co-authored a paper analyzing Ant Colony Optimization (ACO) hyperparameter performance for the Traveling Salesman Problem.",
+        "technologies": ["Python", "JATI Paper", "Algorithm Optimization"],
+        "github_link": "https://github.com/xquan16/Ant_colony_optimization"
+      }
+    ],
+    "certifications": [
+      {
+        "title": "Great Malaysia AI Hackathon Participant",
+        "issuer": "Powered by AWS",
+        "date": "September 2025"
+      },
+      {
+        "title": "MySQL 8.0 Database Administrator",
+        "issuer": "Oracle Certified Professional (OCP)",
+        "date": "July 2025"
+      },
+      {
+        "title": "Red Hat System Admin I & II",
+        "issuer": "Red Hat",
+        "date": "2025"
+      }
+    ],
+    "skills": [
+      "Java", "Python", "C#", "SQL", "Spring Boot", "Kafka", "AWS", "DynamoDB", 
+      "Multi-threading", "System Design", "Linux", "Git", "Algorithm Design"
+    ]
+  }
