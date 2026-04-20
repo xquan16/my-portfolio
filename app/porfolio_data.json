@@ -28,7 +28,8 @@
       {
         "role": "Event Lead & Coordinator",
         "organization": "APU Industry Tech Talk (Deriv)",
-        "period": "March 2026"
+        "period": "March 2026",
+        "link": "https://drive.google.com/drive/folders/1xYMKJTFQp6qpk-8QyuND4fW0-UhtlUbr?usp=sharing"
       },
       {
         "role": "E-commerce Store Owner",
@@ -38,47 +39,83 @@
       }
     ],
     "projects": [
-      {
-        "title": "Zero to AI: Learning Platform",
-        "description": "Engineered a dual-master page architecture with a role-based theming system. Integrated Hugging Face models to deploy a context-aware Real-Time AI Assistant.",
-        "technologies": ["ASP.NET", "C#", "SQL Server", "AI APIs"],
-        "github_link": "https://github.com/xquan16/zero-to-ai"
-      },
-      {
-        "title": "Airport Management System",
-        "description": "Developed a highly concurrent airport simulator using Java threads to manage real-time runway and gate contention, utilizing Semaphores to prevent deadlocks.",
-        "technologies": ["Java", "Multi-threading", "Concurrency", "OOP"],
-        "github_link": "https://github.com/xquan16/airport-management"
-      },
-      {
-        "title": "PLAPS: Library & Parking System",
-        "description": "Developed an advanced data structures application demonstrating Queues, Stacks, and Priority Queues, entirely implemented without using C++ STL containers.",
-        "technologies": ["C++", "Data Structures", "Algorithm Design", "Memory Management"],
-        "github_link": "https://github.com/xquan16/plaps"
-      },
-      {
-        "title": "AI Research (Ant Colony)",
-        "description": "Co-authored a paper analyzing Ant Colony Optimization (ACO) hyperparameter performance for the Traveling Salesman Problem.",
-        "technologies": ["Python", "JATI Paper", "Algorithm Optimization"],
-        "github_link": "https://github.com/xquan16/Ant_colony_optimization"
-      }
-    ],
-    "certifications": [
-      {
-        "title": "Great Malaysia AI Hackathon Participant",
-        "issuer": "Powered by AWS",
-        "date": "September 2025"
-      },
-      {
-        "title": "MySQL 8.0 Database Administrator",
-        "issuer": "Oracle Certified Professional (OCP)",
-        "date": "July 2025"
-      },
-      {
-        "title": "Red Hat System Admin I & II",
-        "issuer": "Red Hat",
-        "date": "2025"
-      }
+        {
+        "id": "airport",
+        "title": "Java Airport Simulation",
+        "type": "project",
+        "description": "Terminal-based concurrent programming with multi-threading simulation.",
+        "techStack": ["Java", "Concurrency", "Multi-threading"],
+        "githubLink": "https://github.com/xquan16/java-airport-simulation",
+        "mediaType": "video",
+        "mediaUrl": "/assets/airport-simulation.mov",
+        "gridClass": "order-1 md:order-none md:col-span-1 md:row-span-3"
+        },
+        {
+        "id": "flight-system",
+        "title": "C++ Flight System",
+        "type": "project",
+        "description": "Time complexity & memory efficiency analysis comparing Array vs Linked List.",
+        "techStack": ["C++", "Data Structures", "Arrays", "Linked Lists"],
+        "githubLink": "https://github.com/xquan16/cpp-flight-system-data-structure",
+        "mediaType": "image",
+        "mediaUrl": "/assets/cpp-flight-system.png",
+        "gridClass": "order-2 md:order-none md:col-span-2 md:row-span-2"
+        },
+        {
+        "id": "zero-to-ai",
+        "title": "Zero to AI",
+        "type": "project",
+        "description": "Full-stack platform with RBAC, dynamic themes, and AI features.",
+        "techStack": ["ASP.NET", "AI", "C#", "SQL"],
+        "githubLink": "https://github.com/xquan16/Zero-to-AI",
+        "mediaType": "video",
+        "mediaUrl": "/assets/zero-to-ai.mp4",
+        "gridClass": "order-6 md:order-none md:col-span-1 md:row-span-4"
+        },
+        {
+        "id": "avatar-center",
+        "title": "Digital Avatar",
+        "type": "avatar",
+        "description": "View All 30+ Repositories",
+        "techStack": [],
+        "githubLink": "https://github.com/xquan16",
+        "mediaType": "image",
+        "mediaUrl": "/assets/avatar-bg.png",
+        "gridClass": "order-4 md:order-none md:col-span-2 md:row-span-3"
+        },
+        {
+        "id": "medical-center",
+        "title": "Java Medical Center",
+        "type": "project",
+        "description": "Advanced OOP architecture with consistent UI and secure data management.",
+        "techStack": ["Java", "OOP", "Swing"],
+        "githubLink": "https://github.com/xquan16/java-medical-system",
+        "mediaType": "video",
+        "mediaUrl": "/assets/java-medical-center.mp4",
+        "gridClass": "order-3 md:order-none md:col-span-1 md:row-span-4"
+        },
+        {
+        "id": "plaps",
+        "title": "C++ PLAPS",
+        "type": "project",
+        "description": "Custom abstract data structures built from scratch.",
+        "techStack": ["C++", "Data Structures", "Queues", "Stacks"],
+        "githubLink": "https://github.com/xquan16/cpp-plaps-data-structures",
+        "mediaType": "image",
+        "mediaUrl": "/assets/plaps-system.png",
+        "gridClass": "order-7 md:order-none md:col-span-1 md:row-span-3"
+        },
+        {
+        "id": "ant-colony",
+        "title": "Ant Colony Optimization",
+        "type": "project",
+        "description": "Parameter tuning for advanced AI pathway optimization.",
+        "techStack": ["AI", "Algorithms"],
+        "githubLink": "https://github.com/xquan16/Ant_colony_optimization",
+        "mediaType": "image",
+        "mediaUrl": "/assets/jati-paper.png",
+        "gridClass": "order-5 md:order-none md:col-span-2 md:row-span-2"
+        }
     ],
     "skills": [
       "Java", "Python", "C#", "SQL", "Spring Boot", "Kafka", "AWS", "DynamoDB", 
