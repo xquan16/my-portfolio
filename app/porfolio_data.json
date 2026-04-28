@@ -29,13 +29,15 @@
         "role": "Event Lead & Coordinator",
         "organization": "APU Industry Tech Talk (Deriv)",
         "period": "March 2026",
-        "link": "https://drive.google.com/drive/folders/1xYMKJTFQp6qpk-8QyuND4fW0-UhtlUbr?usp=sharing"
+        "link": "https://drive.google.com/drive/folders/1xYMKJTFQp6qpk-8QyuND4fW0-UhtlUbr?usp=sharing",
+        "iconType": "gallery"
       },
       {
         "role": "E-commerce Store Owner",
         "organization": "BiGFamilY (Dropshipping)",
         "period": "2020 – 2021",
-        "link": "http://shopee.com.my/big_family.shop"
+        "link": "http://shopee.com.my/big_family.shop",
+        "iconType": "external"
       }
     ],
     "projects": [
@@ -65,7 +67,7 @@
         "id": "zero-to-ai",
         "title": "Zero to AI",
         "type": "project",
-        "description": "Full-stack platform with RBAC, dynamic themes, and AI features.",
+        "description": "Educational platform teaching AI fundamentals with RBAC, dynamic themes, and AI features.",
         "techStack": ["ASP.NET", "AI", "C#", "SQL"],
         "githubLink": "https://github.com/xquan16/Zero-to-AI",
         "mediaType": "video",
@@ -87,7 +89,7 @@
         "id": "medical-center",
         "title": "Java Medical Center",
         "type": "project",
-        "description": "Advanced OOP architecture with consistent UI and secure data management.",
+        "description": "Multi-user medical center management system built with Java Swing and OOP architecture with consistent UI.",
         "techStack": ["Java", "OOP", "Swing"],
         "githubLink": "https://github.com/xquan16/java-medical-system",
         "mediaType": "video",
@@ -98,7 +100,7 @@
         "id": "plaps",
         "title": "C++ PLAPS",
         "type": "project",
-        "description": "Custom abstract data structures built from scratch.",
+        "description": "C++ application that demonstrates data structures including Queues, Stacks, Priority Queues, Priority Queues.",
         "techStack": ["C++", "Data Structures", "Queues", "Stacks"],
         "githubLink": "https://github.com/xquan16/cpp-plaps-data-structures",
         "mediaType": "image",
@@ -109,7 +111,7 @@
         "id": "ant-colony",
         "title": "Ant Colony Optimization",
         "type": "project",
-        "description": "Parameter tuning for advanced AI pathway optimization.",
+        "description": "Tuning hyperparameters on the ACO algorithm's performance for solving the TSP.",
         "techStack": ["AI", "Algorithms"],
         "githubLink": "https://github.com/xquan16/Ant_colony_optimization",
         "mediaType": "image",
@@ -117,6 +119,60 @@
         "gridClass": "order-5 md:order-none md:col-span-2 md:row-span-2"
         }
     ],
+    "certifications": [
+    {
+      "id": "oracle-ocp",
+      "title": "Oracle Certified Professional",
+      "subtitle": "MySQL 8.0 Database Administrator",
+      "date": "July 2025",
+      "number": "1",
+      "themeColor": "bg-[oklch(82.8%_0.111_230.318)]",
+      "textColor": "text-[oklch(82.8%_0.111_230.318)]",
+      "tagBg": "bg-blue-50 dark:bg-blue-900/30",
+      "tagText": "text-blue-800 dark:text-blue-300",
+      "image": "/assets/OCP MySQL 8.0 DBA - eCertificate.png",
+      "tags": ["Database", "MySQL", "OCP"]
+    },
+    {
+      "id": "ai-hackathon",
+      "title": "Great Malaysia AI Hackathon",
+      "subtitle": "Participant (Powered by AWS)",
+      "date": "September 2025",
+      "number": "2",
+      "themeColor": "bg-sky-600",
+      "textColor": "text-sky-600",
+      "tagBg": "bg-sky-50 dark:bg-sky-900/30",
+      "tagText": "text-sky-800 dark:text-sky-300",
+      "image": "/assets/AWS.png",
+      "tags": ["AI", "Hackathon", "AWS"]
+    },
+    {
+      "id": "red-hat",
+      "title": "Red Hat System Admin II",
+      "subtitle": "RH134 Certificate of Attendance",
+      "date": "November 2025",
+      "number": "3",
+      "themeColor": "bg-red-600",
+      "textColor": "text-red-600 dark:text-red-500",
+      "tagBg": "bg-red-50 dark:bg-red-900/30",
+      "tagText": "text-red-800 dark:text-red-300",
+      "image": "/assets/Red Hat System Administration II (RH134 - RHA) - Ver. 9.3.png",
+      "tags": ["Linux", "Red Hat", "Advanced"]
+    },
+    {
+      "id": "blackberry-ccoe",
+      "title": "Blackberry CCoE",
+      "subtitle": "Security Awareness Training",
+      "date": "February 2025",
+      "number": "4",
+      "themeColor": "bg-gray-700 dark:bg-gray-500",
+      "textColor": "text-gray-900 dark:text-gray-100",
+      "tagBg": "bg-gray-100 dark:bg-gray-800",
+      "tagText": "text-gray-800 dark:text-gray-300",
+      "image": "/assets/CCoE Cert - Security Awareness (Chan Xin Quan)_24.02.25_1.png",
+      "tags": ["Security", "Training"]
+    }
+  ],
     "skills": [
       "Java", "Python", "C#", "SQL", "Spring Boot", "Kafka", "AWS", "DynamoDB", 
       "Multi-threading", "System Design", "Linux", "Git", "Algorithm Design"

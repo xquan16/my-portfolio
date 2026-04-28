@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+
 import portfolioData from "./porfolio_data.json";
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const MONTH_LOOKUP: Record<string, number> = {
   jan: 0,
@@ -77,15 +79,58 @@ function isCurrentExperience(period: string) {
   return endScore >= currentScore;
 }
 
+const getTagStyle = (tag: string) => {
+  const styles: Record<string, string> = {
+    // Core Languages & Frameworks
+    "Java": "bg-rose-500/30 text-rose-100 border-rose-400/50",
+    "C++": "bg-sky-500/30 text-sky-100 border-sky-400/50", // Shifted to bright sky blue
+    "C#": "bg-purple-500/30 text-purple-100 border-purple-400/50",
+    "ASP.NET": "bg-pink-500/30 text-pink-100 border-pink-400/50",
+    "SQL": "bg-blue-400/30 text-blue-100 border-blue-400/50",
+    "Swing": "bg-fuchsia-500/30 text-fuchsia-100 border-fuchsia-400/50",
+    
+    // Core Concepts 
+    "OOP": "bg-emerald-500/30 text-emerald-100 border-emerald-400/50",
+    "AI": "bg-amber-500/30 text-amber-100 border-amber-400/50",
+    "Algorithms": "bg-orange-500/30 text-orange-100 border-orange-400/50",
+    "Concurrency": "bg-fuchsia-500/30 text-fuchsia-100 border-fuchsia-400/50", // Shifted away from dark blue
+    "Multi-threading": "bg-violet-400/30 text-violet-100 border-violet-400/50", // Brightened violet
+
+    // Specific Data Structures
+    "Data Structures": "bg-teal-500/30 text-teal-100 border-teal-400/50",
+    "Arrays": "bg-cyan-500/30 text-cyan-100 border-cyan-400/50",
+    "Linked Lists": "bg-yellow-500/30 text-yellow-100 border-yellow-400/50", // Shifted to yellow to pop against blue
+    "Queues": "bg-red-500/30 text-red-100 border-red-400/50",
+    "Stacks": "bg-lime-500/30 text-lime-100 border-lime-400/50",
+  };
+
+  return styles[tag] || "bg-zinc-400/30 text-zinc-100 border-zinc-400/50 shadow-sm";
+};
+
 export default function Home() {
   const [isGeekMode, setIsGeekMode] = useState(false);
-  const { personal_info, work_experience, projects } = portfolioData;
+  const { personal_info, work_experience, projects, certifications } = portfolioData;
+  const [activeCert, setActiveCert] = useState(0); // Existing
+  const [zoomedImg, setZoomedImg] = useState<string | null>(null); // For the Lightbox Zoom
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true); // For Auto-play
+
+  // Auto-play Effect
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    
+    const interval = setInterval(() => {
+      setActiveCert((prev) => (prev + 1) % portfolioData.certifications.length);
+    }, 2000);
+    
+    return () => clearInterval(interval);
+  }, [isAutoPlaying]);
 
   return (
     <div className={isGeekMode ? "dark" : ""}>
-      <div className="min-h-screen bg-[oklch(98%_0.045_203.388)] text-slate-900 transition-colors duration-500 dark:bg-zinc-950 dark:text-zinc-50">
+      <div className={`${isGeekMode ? "dark" : ""} min-h-screen bg-[oklch(98%_0.045_203.388)] text-slate-900 transition-colors duration-500 dark:bg-zinc-950 dark:text-zinc-50`}>
+      <div>
         <header className="fixed top-0 z-50 w-full border-b border-sky-950/30 bg-sky-700/95 text-sky-50 backdrop-blur dark:border-zinc-500/40 dark:bg-zinc-800/90">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <div className="mx-auto flex max-w-7xl md:max-w-6xl items-center justify-between px-8 md:px-12 py-4">
           <p className="text-2xl font-black md:text-3xl">
             {personal_info.name}
           </p>
@@ -120,6 +165,7 @@ export default function Home() {
             </button>
           </div>
         </header>
+      </div>
 
         <main className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr] gap-16 items-start max-w-7xl mx-auto pt-32 px-6">
           <section>
@@ -129,7 +175,7 @@ export default function Home() {
             <p className="text-xl md:text-2xl font-bold text-sky-800 dark:text-emerald-400 whitespace-nowrap">
               {personal_info.degree}
             </p>
-            <p className="text-s md:text-s font-semibold  text-gray-400 dark:text-zinc-300 whitespace-nowrap">
+            <p className="text-sm font-semibold  text-gray-400 dark:text-zinc-300 whitespace-nowrap">
               Current Status: {personal_info.current_status}
             </p>
 
@@ -144,7 +190,7 @@ export default function Home() {
                       <div className="relative flex w-5 justify-center">
                         <span
                           className={`absolute top-4 w-px bg-slate-300 dark:bg-zinc-700 ${
-                            isLast ? "h-15" : "h-[calc(100%+1rem)]"
+                            isLast ? "h-14" : "h-[calc(100%+1rem)]"
                           }`}
                         />
                         <span
@@ -176,7 +222,7 @@ export default function Home() {
                               aria-label="Visit Shop"
                               className="text-cyan-400 hover:text-blue-600 dark:text-emerald-500 dark:hover:text-emerald-300 transition-colors transform hover:scale-110"
                             >
-                              {experience.organization.includes("Deriv") ? (
+                              {experience.iconType === "gallery" ? (
                                 <>
                                   <svg className="w-6 h-6 transform group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -270,11 +316,11 @@ export default function Home() {
         </main>
 
         <section className="py-20">
-          <h2 className="mb-8 text-3xl font-black tracking-tight text-slate-900 dark:text-zinc-100">
+          <h2 className="mb-8 text-center text-3xl font-black tracking-tight text-blue-950 dark:text-zinc-100">
             Featured Projects
           </h2>
 
-          <div className="grid md:grid-cols-[1.5fr_1fr_1fr_1.5fr] auto-rows-[100px] gap-2 max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-[1.5fr_1fr_1fr_1.5fr] auto-rows-[280px] md:auto-rows-[100px] gap-4 max-w-7xl mx-auto px-6">
             {projects.map((project, index) => {
               const isAvatar = project.type === "avatar";
               const projectKey = `${project.id ?? project.title}-${index}`;
@@ -309,10 +355,11 @@ export default function Home() {
                           src={project.mediaUrl}
                         />
                       ) : (
-                        <img
+                        <Image
                           src={project.mediaUrl}
                           alt={project.title}
-                          className="object-cover w-full h-full"
+                          fill
+                          className="object-cover"
                         />
                       )}
 
@@ -320,42 +367,46 @@ export default function Home() {
                         href={project.githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-white/[0.95] via-white/[0.60] to-transparent p-6 flex-col justify-end transition-all duration-500 hidden md:flex translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 dark:from-zinc-950/[0.95] dark:via-zinc-900/[0.60] dark:to-transparent"
+                        className="absolute inset-x-0 bottom-0 pt-24 bg-gradient-to-t from-blue-950/[0.95] via-blue-900/[0.8] to-transparent p-6 flex-col justify-end transition-all duration-500 hidden md:flex translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 dark:from-zinc-900/[0.95] dark:via-zinc-800/[0.8] dark:to-transparent"
                       >
-                        <p className="text-slate-900 font-extrabold text-xl drop-shadow-sm dark:text-white">
+                        <p className="text-white font-bold text-xl drop-shadow-md">
                           {project.title}
+                        </p>
+                        <p className="mt-1.5 text-xs md:text-sm font-medium text-blue-100 line-clamp-2 leading-relaxed">
+                          {project.description}
                         </p>
                         <div className="mt-3 flex flex-wrap gap-2">
                           {project.techStack.map((tag) => (
                             <span
                               key={`${project.id}-${tag}`}
-                              className="bg-black/5 backdrop-blur-sm border border-black/10 text-slate-800 font-bold text-[10px] uppercase tracking-wider rounded-full px-2.5 py-1 dark:bg-white/10 dark:border-white/20 dark:text-white"
-                            >
+                              className={`backdrop-blur-md border text-[10px] uppercase tracking-wider font-bold rounded-full px-2.5 py-1 transition-colors ${getTagStyle(tag)}`}                            >
                               {tag}
                             </span>
                           ))}
                         </div>
                       </a>
 
-                      {/* Mobile Overlay */}
                       <motion.a
                         href={project.githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
                         initial={{ y: 16, opacity: 0 }}
                         whileInView={{ y: 0, opacity: 1 }}
-                        viewport={{ amount: 0.6 }}
+                        viewport={{ margin: "-35% 0px -35% 0px", once: false }}
                         transition={{ duration: 0.5, ease: "easeOut" }}
-                        className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-white/[0.95] via-white/[0.60] to-transparent p-6 flex flex-col justify-end transition-all duration-500 md:hidden dark:from-zinc-950/[0.95] dark:via-zinc-900/[0.60] dark:to-transparent"
+                        className="absolute inset-x-0 bottom-0 pt-24 bg-gradient-to-t from-blue-950/[0.95] via-blue-900/[0.8] to-transparent p-6 flex flex-col justify-end transition-all duration-500 md:hidden dark:from-zinc-900/[0.95] dark:via-zinc-800/[0.8] dark:to-transparent"
                       >
-                        <p className="text-slate-900 font-extrabold text-xl drop-shadow-sm dark:text-white">
+                        <p className="text-white font-bold text-xl drop-shadow-md">
                           {project.title}
+                        </p>
+                        <p className="mt-1.5 text-xs md:text-sm font-medium text-blue-100 line-clamp-2 leading-relaxed">
+                          {project.description}
                         </p>
                         <div className="mt-3 flex flex-wrap gap-2">
                           {project.techStack.map((tag) => (
                             <span
                               key={`${project.id}-${tag}-mobile`}
-                              className="bg-black/5 backdrop-blur-sm border border-black/10 text-slate-800 font-bold text-[10px] uppercase tracking-wider rounded-full px-2.5 py-1 dark:bg-white/10 dark:border-white/20 dark:text-white"
+                              className={`backdrop-blur-md border text-[10px] uppercase tracking-wider font-bold rounded-full px-2.5 py-1 transition-colors ${getTagStyle(tag)}`}
                             >
                               {tag}
                             </span>
@@ -369,6 +420,142 @@ export default function Home() {
             })}
           </div>
         </section>
+
+       {/* Certifications 3D Carousel Section */}
+       <section className="py-20 overflow-hidden relative">
+          <div className="max-w-7xl mx-auto px-4 md:px-6">
+            <h2 className="mb-6 text-center text-3xl md:text-4xl font-bold tracking-tight text-blue-950 dark:text-zinc-100">
+              My Certifications & Achievements
+            </h2>
+
+            {/* 3D Carousel Wrapper */}
+            <div 
+              className="relative h-[420px] md:h-[580px] w-full flex items-center justify-center perspective-[1100px]"
+              onMouseEnter={() => setIsAutoPlaying(false)}
+              onMouseLeave={() => setIsAutoPlaying(true)}
+            >
+              {certifications.map((cert, index) => {
+                const isActive = index === activeCert;
+                const offset = index - activeCert;
+                const isLeft = offset === -1;
+                const isRight = offset === 1;
+                const isHidden = Math.abs(offset) > 1;
+
+                return (
+                  <motion.div
+                    key={cert.id}
+                    className="absolute top-0 w-[85vw] md:w-[60vw] max-w-[380px] md:max-w-[900px] cursor-pointer origin-center"
+                    onClick={() => !isActive && setActiveCert(index)}
+                    initial={false}
+                    animate={{
+                      x: isActive ? "0%" : isLeft ? "-55%" : isRight ? "55%" : offset > 0 ? "100%" : "-100%",
+                      scale: isActive ? 1 : 0.85,
+                      opacity: isActive ? 1 : isHidden ? 0 : 0.4,
+                      zIndex: isActive ? 30 : isHidden ? 0 : 10,
+                      rotateY: isActive ? 0 : isLeft ? 15 : isRight ? -15 : 0,
+                    }}
+                    transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+                    style={{ pointerEvents: isHidden ? "none" : "auto" }}
+                  >
+                    {/* The Card UI */}
+                    <div className={`bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden transition-all duration-500 flex flex-col ${isActive ? "shadow-2xl ring-1 ring-black/5 dark:ring-white/10" : "shadow-md blur-[2px]"}`}>
+                      
+                      {/* Top Image (Wider Aspect Ratio) */}
+                      <div 
+                        className={`relative w-full aspect-[4/3] md:aspect-[2/1] bg-gray-100 dark:bg-zinc-800 ${isActive ? "cursor-zoom-in" : ""}`}
+                        onClick={(e) => {
+                          if (isActive) {
+                            e.stopPropagation();
+                            setZoomedImg(cert.image);
+                          }
+                        }}
+                      >
+                        <Image
+                          src={cert.image}
+                          alt={cert.title}
+                          fill
+                          className="object-cover"
+                          priority={index === 0}
+                        />
+                      </div>
+
+                      <div className="p-6 flex flex-col justify-between bg-white dark:bg-zinc-900">
+                        <div className="mb-4">
+                          <p className="text-xs md:text-sm text-gray-500 dark:text-zinc-400 font-medium mb-1">{cert.date}</p>
+                          <h3 className={`text-xl md:text-3xl font-bold mb-1 ${cert.textColor}`}>
+                            {cert.title}
+                          </h3>
+                          <p className="text-sm md:text-base text-gray-700 dark:text-zinc-300 font-medium">
+                            {cert.subtitle}
+                          </p>
+                        </div>
+
+                        {/* Tags */}
+                        <div className="flex flex-wrap gap-2">
+                          {cert.tags.map((tag, tIdx) => (
+                            <span 
+                              key={tIdx} 
+                              className={`text-xs font-bold tracking-wide px-3 py-1 rounded-full ${cert.tagBg} ${cert.tagText}`}
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Apple iOS-Style Dynamic Progress Pill */}
+            <div className="mt-8 md:mt-0 flex justify-center">
+              <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-slate-200/50 dark:bg-zinc-800/50 backdrop-blur-sm border border-black/5 dark:border-white/5">
+                {certifications.map((_, index) => (
+                  <button
+                    key={`dot-${index}`}
+                    onClick={() => setActiveCert(index)}
+                    aria-label={`Go to slide ${index + 1}`}
+                    className="relative h-2 rounded-full transition-all duration-500 ease-out"
+                    style={{ width: activeCert === index ? "24px" : "8px" }}
+                  >
+                    <span 
+                      className={`absolute inset-0 rounded-full transition-colors duration-500 ${
+                        activeCert === index 
+                          ? "bg-blue-600 dark:bg-zinc-200" 
+                          : "bg-slate-400/50 dark:bg-zinc-600 hover:bg-slate-500 dark:hover:bg-zinc-500"
+                      }`}
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            {/* Image Zoom Lightbox Modal */}
+            <AnimatePresence>
+              {zoomedImg && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setZoomedImg(null)}
+                  className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 md:p-10 cursor-zoom-out"
+                >
+                  <motion.div
+                    initial={{ scale: 0.9, y: 20 }}
+                    animate={{ scale: 1, y: 0 }}
+                    exit={{ scale: 0.9, y: 20 }}
+                    transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                    className="relative w-full max-w-5xl aspect-video rounded-xl overflow-hidden shadow-2xl"
+                  >
+                    <Image src={zoomedImg} alt="Zoomed Certificate" fill className="object-contain" />
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </section>
+
       </div>
     </div>
   );
