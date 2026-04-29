@@ -5,6 +5,7 @@ import portfolioData from "./porfolio_data.json";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Script from "next/script";
 
 const MONTH_LOOKUP: Record<string, number> = {
   jan: 0,
@@ -71,7 +72,6 @@ function isCurrentExperience(period: string) {
     return false;
   }
 
-  // const startScore = start.year * 12 + start.month;
   const endScore = end.year * 12 + end.month;
   const now = new Date();
   const currentScore = now.getFullYear() * 12 + now.getMonth();
@@ -103,7 +103,6 @@ const getTagStyle = (tag: string) => {
     "Queues": "bg-red-500/30 text-red-100 border-red-400/50",
     "Stacks": "bg-lime-500/30 text-lime-100 border-lime-400/50",
   };
-
   return styles[tag] || "bg-zinc-400/30 text-zinc-100 border-zinc-400/50 shadow-sm";
 };
 
@@ -113,6 +112,19 @@ export default function Home() {
   const [activeCert, setActiveCert] = useState(0); // Existing
   const [zoomedImg, setZoomedImg] = useState<string | null>(null); // For the Lightbox Zoom
   const [isAutoPlaying, setIsAutoPlaying] = useState(true); // For Auto-play
+  const allSkills = [
+    ...portfolioData.skills.languages,
+    ...portfolioData.skills.ai_and_data_science,
+    ...portfolioData.skills.cloud_and_infrastructure,
+    ...portfolioData.skills.systems_and_architecture,
+    ...portfolioData.skills.frameworks_and_tools,
+  ];
+  const vibrantColors = [
+    "#3b82f6", "#ef4444", "#10b981", "#f59e0b", "#8b5cf6",
+    "#06b6d4", "#ec4899", "#84cc16", "#f97316", "#6366f1",
+    "#14b8a6", "#d946ef", "#eab308", "#22c55e", "#0ea5e9"
+  ];
+  const variedSizes = [2.5, 1.5, 2.0, 1.2, 2.8, 1.8, 2.2, 1.4, 2.6, 1.6, 2.4, 1.3, 2.1, 1.9, 2.7];
 
   // Auto-play Effect
   useEffect(() => {
@@ -125,15 +137,50 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
 
+  const [randomizedSkills, setRandomizedSkills] = useState<{name: string, color: string, size: string}[]>([]);
+
+  useEffect(() => {
+    const mappedSkills = allSkills.map((skill) => ({
+      name: skill,
+      color: vibrantColors[Math.floor(Math.random() * vibrantColors.length)],
+      size: variedSizes[Math.floor(Math.random() * variedSizes.length)] + "rem"
+    }));
+    setRandomizedSkills(mappedSkills);
+  }, []);
+
   return (
-    <div className={isGeekMode ? "dark" : ""}>
+    <div>
+      <Script 
+        src="https://www.goat1000.com/tagcanvas.min.js" 
+        strategy="lazyOnload"
+        onLoad={() => {
+          try {
+            // @ts-ignore
+            window.TagCanvas.Start('skillCloud', 'skillTags', {
+              textColour: null, 
+              outlineColour: 'transparent',
+              reverse: true,
+              depth: 0.8,
+              maxSpeed: 0.05,
+              initial: [0.1, -0.1],
+              wheelZoom: false,
+              textFont: 'Inter, sans-serif',
+              weight: true,
+              weightMode: 'size', // <-- THIS LINE ACTIVATES THE RANDOM SIZES IN 3D
+            });
+          } catch (e) {
+            console.error('Canvas error:', e);
+          }
+        }}
+      />
+
       <div className={`${isGeekMode ? "dark" : ""} min-h-screen bg-[oklch(98%_0.045_203.388)] text-slate-900 transition-colors duration-500 dark:bg-zinc-950 dark:text-zinc-50`}>
       <div>
         <header className="fixed top-0 z-50 w-full border-b border-sky-950/30 bg-sky-700/95 text-sky-50 backdrop-blur dark:border-zinc-500/40 dark:bg-zinc-800/90">
-          <div className="mx-auto flex max-w-7xl md:max-w-6xl items-center justify-between px-8 md:px-12 py-4">
-          <p className="text-2xl font-black md:text-3xl">
-            {personal_info.name}
-          </p>
+          <div className="flex w-full items-center justify-between px-6 md:px-12 py-4">
+            <p className="text-2xl font-black md:text-3xl">
+              {personal_info.name}
+            </p>
 
             <button
               type="button"
@@ -421,11 +468,11 @@ export default function Home() {
           </div>
         </section>
 
-       {/* Certifications 3D Carousel Section */}
-       <section className="py-20 overflow-hidden relative">
+        {/* Certifications 3D Carousel Section */}
+        <section className="py-20 overflow-hidden relative">
           <div className="max-w-7xl mx-auto px-4 md:px-6">
-            <h2 className="mb-6 text-center text-3xl md:text-4xl font-bold tracking-tight text-blue-950 dark:text-zinc-100">
-              My Certifications & Achievements
+            <h2 className="mb-6 md:mb-10 text-center text-3xl md:text-4xl font-bold tracking-tight text-blue-950 dark:text-zinc-100">
+              Certifications & Achievements
             </h2>
 
             {/* 3D Carousel Wrapper */}
@@ -509,7 +556,7 @@ export default function Home() {
             </div>
 
             {/* Apple iOS-Style Dynamic Progress Pill */}
-            <div className="mt-8 md:mt-0 flex justify-center">
+            <div className="mt-8 md:mt-14 flex justify-center">
               <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-slate-200/50 dark:bg-zinc-800/50 backdrop-blur-sm border border-black/5 dark:border-white/5">
                 {certifications.map((_, index) => (
                   <button
@@ -553,6 +600,57 @@ export default function Home() {
                 </motion.div>
               )}
             </AnimatePresence>
+          </div>
+        </section>
+
+        {/* Skills 3D Cloud Section */}
+        <section className="py-12 overflow-hidden bg-[oklch(98%_0.045_203.388)] dark:bg-zinc-950">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
+            <h2 className="text-center text-3xl md:text-4xl font-bold tracking-tight text-blue-950 dark:text-zinc-100">
+              Skills
+            </h2>
+
+            <div className="w-full max-w-full overflow-hidden flex justify-center">
+              <canvas 
+                id="skillCloud" 
+                width="1200" 
+                height="800" 
+                className="w-full max-w-[1100px] h-auto cursor-grab active:cursor-grabbing"
+              >
+                <p>Error: Your browser does not support the HTML canvas element.</p>
+              </canvas>
+            </div>
+
+            {/* Safe Hydration Mapping */}
+            <div id="skillTags" className="hidden">
+              <ul>
+                {randomizedSkills.length > 0
+                  ? /* CLIENT RENDER: Use the truly random values */
+                    randomizedSkills.map((skill, i) => (
+                      <li key={`client-skill-${i}`}>
+                        <a
+                          href="#"
+                          onClick={(e) => e.preventDefault()}
+                          style={{ fontSize: skill.size, color: skill.color }}
+                        >
+                          {skill.name}
+                        </a>
+                      </li>
+                    ))
+                  : /* SERVER RENDER: Safe fallback using modulo to prevent hydration errors */
+                    allSkills.map((skill, i) => {
+                      const safeColor = vibrantColors[i % vibrantColors.length];
+                      const safeSize = variedSizes[i % variedSizes.length] + "rem";
+                      return (
+                        <li key={`server-skill-${i}`}>
+                          <a href="#" style={{ fontSize: safeSize, color: safeColor }}>
+                            {skill}
+                          </a>
+                        </li>
+                      );
+                    })}
+              </ul>
+            </div>
           </div>
         </section>
 

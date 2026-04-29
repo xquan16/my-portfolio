@@ -173,8 +173,53 @@
       "tags": ["Security", "Training"]
     }
   ],
-    "skills": [
-      "Java", "Python", "C#", "SQL", "Spring Boot", "Kafka", "AWS", "DynamoDB", 
-      "Multi-threading", "System Design", "Linux", "Git", "Algorithm Design"
+
+  "skills": {
+    "languages": [
+      "Python",
+      "Java",
+      "C++",
+      "C#",
+      "SQL",
+      "R",
+      "Assembly Language"
+    ],
+    "cloud_and_infrastructure": [
+      "AWS",
+      "Linux",
+      "Rocky",
+      "Ubuntu",
+      "Red Hat",
+      "Apache",
+      "Git",
+      "GitHub"
+    ],
+    "frameworks_and_tools": [
+      "ASP.NET",
+      "Java Swing (GUI)",
+      "MySQL 8.0",
+      "Pygame",
+      "Figma"
+    ],
+    "systems_and_architecture": [
+      "Object-Oriented Programming",
+      "Data Structures",
+      "Algorithm Design",
+      "Concurrent Programming",
+      "System Design",
+      "SDLC",
+      "Array",
+      "Links List",
+      "Queue",
+      "Stack",
+      "Tree",
+      "Graph"
+    ],
+    "ai_and_data_science": [
+      "Artificial Intelligence",
+      "ACO",
+      "LLM",
+      "Data Analysis"
     ]
-  }
+  }   
+}
