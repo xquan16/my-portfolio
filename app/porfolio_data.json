@@ -157,7 +157,7 @@
       "tagBg": "bg-red-50 dark:bg-red-900/30",
       "tagText": "text-red-800 dark:text-red-300",
       "image": "/assets/Red Hat System Administration II (RH134 - RHA) - Ver. 9.3.png",
-      "tags": ["Linux", "Red Hat", "Advanced"]
+      "tags": ["Linux", "Red Hat"]
     },
     {
       "id": "blackberry-ccoe",
